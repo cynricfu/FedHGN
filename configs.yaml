@@ -1,0 +1,65 @@
+---
+datasets:
+  nc_default: &nc_dataset_default
+    task: "node_classification"
+  lp_default: &lp_dataset_default
+    task: "link_prediction"
+  AIFB:
+    <<: *nc_dataset_default
+    cname: "aifb-hetero"
+    path: "./data/aifb-hetero"
+  MUTAG:
+    <<: *nc_dataset_default
+    cname: "mutag-hetero"
+    path: "./data/mutag-hetero"
+  BGS:
+    <<: *nc_dataset_default
+    cname: "bgs-hetero"
+    path: "./data/bgs-hetero"
+
+models:
+  default: &model_default
+    hidden_dim: 64
+    neg_sample_size: 1
+    margin: 1.0
+    batch_size: 10000000  # basically full batch training
+    optim: "SGD"
+    lr: 0.01
+    weight_decay: 0.0
+    val_interval: 1
+    patience: 10
+  RGCN: &RGCN
+    <<: *model_default
+    num_layers: 2
+    dropout: 0.0
+  RGCN_nc:
+    <<: *RGCN
+    lr: 0.1
+    use_self_loop: False
+
+frameworks:
+  fl_default: &fl_framework_default
+    num_local_epochs: 3
+    max_rounds: 1000
+    fraction: 1.0
+  FedHGN: &FedHGN
+    <<: *fl_framework_default
+    align_reg: 0.5
+  FedHGN_nc:
+    <<: *FedHGN
+    align_reg: 0.5  # might need to adjust
+    num_bases: 20
+  FedAvg:
+    <<: *fl_framework_default
+    num_bases: -1
+    mu: 0.0
+  FedProx:
+    <<: *fl_framework_default
+    num_bases: -1
+    mu: 1.0
+  Local:
+    max_epochs: 6000
+    num_bases: -1
+  Central:
+    max_epochs: 6000
+    num_bases: -1
