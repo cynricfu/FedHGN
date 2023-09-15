@@ -3,7 +3,7 @@
 This repository provides a reference implementation of FedHGN as described in the following paper.
 > FedHGN: A Federated Framework for Heterogeneous Graph Neural Networks<br>
 > Xinyu Fu, Irwin King<br>
-> To appear at IJCAI 2023
+> International Joint Conference on Artificial Intelligence, 2023
 
 Available at [arXiv:2305.09729](https://arxiv.org/abs/2305.09729).
 
@@ -61,11 +61,13 @@ python main.py -d AIFB -s edges -f FedHGN -c 5 -g 0
 
 If you find FedHGN useful in your research, please cite the following paper:
 ```
-@article{fu2023fedhgn,
-  author    = {Xinyu Fu and Irwin King},
-  title     = {FedHGN: A Federated Framework for Heterogeneous Graph Neural Networks},
-  journal   = {CoRR},
-  volume    = {abs/2305.09729},
-  year      = {2023}
+@inproceedings{fu2023fedhgn,
+  author       = {Xinyu Fu and
+                  Irwin King},
+  title        = {FedHGN: {A} Federated Framework for Heterogeneous Graph Neural Networks},
+  booktitle    = {{IJCAI}},
+  pages        = {3705--3713},
+  publisher    = {ijcai.org},
+  year         = {2023}
 }
 ```
